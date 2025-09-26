@@ -83,13 +83,9 @@ struct AdvertiserOnboardingView: View {
             .navigationTitle("Create Campaign")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-            }
+            .navigationBarItems(leading: Button("Cancel") {
+                dismiss()
+            })
         }
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(selectedImage: $selectedImage)
