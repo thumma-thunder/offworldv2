@@ -82,6 +82,7 @@ struct AdvertiserOnboardingView: View {
             }
             .navigationTitle("Create Campaign")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
