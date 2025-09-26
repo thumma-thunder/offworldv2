@@ -1,0 +1,89 @@
+﻿When you get onto the app you pick either advertiser or driver here is what both sides will need
+
+
+
+
+Advertiser - 10$ monthly fee + 1$ monthly fee per sticker in use
+
+
+You first say if your sticker is location based (as in if you specifically want it in certain zip codes) and if so what areas you are good with drivers being in 
+
+
+Then you pick if you want to provide and ship the stickers yourself or if you just want to submit the design and have us take care of it
+
+
+Then you submit your designs + size repeat what areas you want them to show up in 
+
+
+Then the final step before they publish the ad for drivers is it would run them through exactly how much each sticker will cost then a month to pay drivers and what's the most amount of stickers they are willing to pay for 
+WILL ADD PRICE SCALING SOON will need more info on which company we will be working with which i will have by the end of august
+
+
+
+
+Driver
+
+
+First thing you do is put zip codes in 
+
+
+Then it lists all advertising you can put on your car along with prices 
+
+
+Then if drivers click on an ad and press deliver they put their address in and bank account details and it will either let the company know where to send it if the company wants to provide them themselves OR if the company elected us to do it send the information to the company that is still to be decided 
+
+
+Once a month in the app camera (like snapchat) will let you know you have 24 hours to send a picture of the stickers on your car
+
+
+
+
+
+
+
+
+
+
+Payment
+App will need to be able to take money from companies and give it monthly to the drivers
+
+
+If companies choose to let us produce the stickers we need a way for them to pay us for manufacturing them
+
+
+
+
+Sams part:
+
+
+WHO
+	Noah, Sam, Joel
+	WHAT
+	Detailed description of the product
+	WHEN
+	Before Thanksgiving
+	WHERE
+	Location based
+	WHY
+	Simplify advertising
+	HOW
+	Below
+	
+
+1. Design
+2. Front end
+   1. Tech stack: React native to ensure compatibility between apple, android, and possibly web
+3. Back-end 
+   1. The backend should serve as a communicator between the client.
+   2. Things to send to back-end:
+      1. Location (zipcode)
+      2. Account detail (names, company, etc)
+      3. provide/ship
+   3. Tech stack - REST/GET api build on Node.js with maybe express
+4. Database
+   1. Secure
+   2. Need consistency and availability because of payments
+5. Payment - Third party
+6. Deploy
+   1. Front end- figure it out as we go (publishing app might be tricky)
+   2. Backend/api - vercel free tier until we need to scale
