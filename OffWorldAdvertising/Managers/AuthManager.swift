@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum UserType: String, CaseIterable {
+enum UserType: String, CaseIterable, Codable {
     case advertiser = "advertiser"
     case driver = "driver"
 }
