@@ -446,6 +446,7 @@ struct AdvertiserOnboardingView: View {
             }
             .padding(20)
         }
+    }
     
     private var canProceed: Bool {
         switch currentStep {
