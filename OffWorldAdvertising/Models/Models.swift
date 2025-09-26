@@ -21,6 +21,35 @@ struct User: Codable, Identifiable {
         self.createdAt = Date()
         self.updatedAt = Date()
     }
+    
+    // Custom Codable implementation to handle Date encoding/decoding
+    enum CodingKeys: String, CodingKey {
+        case id, email, userType, companyName, fullName, isOnboarded, createdAt, updatedAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        email = try container.decode(String.self, forKey: .email)
+        userType = try container.decode(UserType.self, forKey: .userType)
+        companyName = try container.decodeIfPresent(String.self, forKey: .companyName)
+        fullName = try container.decodeIfPresent(String.self, forKey: .fullName)
+        isOnboarded = try container.decode(Bool.self, forKey: .isOnboarded)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(email, forKey: .email)
+        try container.encode(userType, forKey: .userType)
+        try container.encodeIfPresent(companyName, forKey: .companyName)
+        try container.encodeIfPresent(fullName, forKey: .fullName)
+        try container.encode(isOnboarded, forKey: .isOnboarded)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
+    }
 }
 
 // MARK: - Campaign Model
@@ -53,6 +82,45 @@ struct Campaign: Codable, Identifiable {
         self.isActive = isActive
         self.createdAt = Date()
         self.updatedAt = Date()
+    }
+    
+    // Custom Codable implementation to handle Date encoding/decoding
+    enum CodingKeys: String, CodingKey {
+        case id, advertiserId, title, description, stickerDesign, stickerSize, targetZipCodes, monthlyPayment, maxStickers, isLocationBased, isActive, createdAt, updatedAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        advertiserId = try container.decode(String.self, forKey: .advertiserId)
+        title = try container.decode(String.self, forKey: .title)
+        description = try container.decode(String.self, forKey: .description)
+        stickerDesign = try container.decode(String.self, forKey: .stickerDesign)
+        stickerSize = try container.decode(StickerSize.self, forKey: .stickerSize)
+        targetZipCodes = try container.decode([String].self, forKey: .targetZipCodes)
+        monthlyPayment = try container.decode(Double.self, forKey: .monthlyPayment)
+        maxStickers = try container.decode(Int.self, forKey: .maxStickers)
+        isLocationBased = try container.decode(Bool.self, forKey: .isLocationBased)
+        isActive = try container.decode(Bool.self, forKey: .isActive)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(advertiserId, forKey: .advertiserId)
+        try container.encode(title, forKey: .title)
+        try container.encode(description, forKey: .description)
+        try container.encode(stickerDesign, forKey: .stickerDesign)
+        try container.encode(stickerSize, forKey: .stickerSize)
+        try container.encode(targetZipCodes, forKey: .targetZipCodes)
+        try container.encode(monthlyPayment, forKey: .monthlyPayment)
+        try container.encode(maxStickers, forKey: .maxStickers)
+        try container.encode(isLocationBased, forKey: .isLocationBased)
+        try container.encode(isActive, forKey: .isActive)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
     }
 }
 
@@ -104,6 +172,37 @@ struct Application: Codable, Identifiable {
         self.approvedAt = approvedAt
         self.driverAddress = driverAddress
         self.bankAccountDetails = bankAccountDetails
+    }
+    
+    // Custom Codable implementation to handle Date encoding/decoding
+    enum CodingKeys: String, CodingKey {
+        case id, driverId, campaignId, status, appliedAt, reviewedAt, approvedAt, driverAddress, bankAccountDetails
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        driverId = try container.decode(String.self, forKey: .driverId)
+        campaignId = try container.decode(String.self, forKey: .campaignId)
+        status = try container.decode(ApplicationStatus.self, forKey: .status)
+        appliedAt = try container.decode(Date.self, forKey: .appliedAt)
+        reviewedAt = try container.decodeIfPresent(Date.self, forKey: .reviewedAt)
+        approvedAt = try container.decodeIfPresent(Date.self, forKey: .approvedAt)
+        driverAddress = try container.decode(String.self, forKey: .driverAddress)
+        bankAccountDetails = try container.decode(BankAccountDetails.self, forKey: .bankAccountDetails)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(driverId, forKey: .driverId)
+        try container.encode(campaignId, forKey: .campaignId)
+        try container.encode(status, forKey: .status)
+        try container.encode(appliedAt, forKey: .appliedAt)
+        try container.encodeIfPresent(reviewedAt, forKey: .reviewedAt)
+        try container.encodeIfPresent(approvedAt, forKey: .approvedAt)
+        try container.encode(driverAddress, forKey: .driverAddress)
+        try container.encode(bankAccountDetails, forKey: .bankAccountDetails)
     }
 }
 
@@ -169,6 +268,35 @@ struct Payment: Codable, Identifiable {
         self.createdAt = createdAt
         self.processedAt = processedAt
     }
+    
+    // Custom Codable implementation to handle Date encoding/decoding
+    enum CodingKeys: String, CodingKey {
+        case id, userId, amount, type, status, description, createdAt, processedAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        userId = try container.decode(String.self, forKey: .userId)
+        amount = try container.decode(Double.self, forKey: .amount)
+        type = try container.decode(PaymentType.self, forKey: .type)
+        status = try container.decode(PaymentStatus.self, forKey: .status)
+        description = try container.decode(String.self, forKey: .description)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        processedAt = try container.decodeIfPresent(Date.self, forKey: .processedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(userId, forKey: .userId)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(type, forKey: .type)
+        try container.encode(status, forKey: .status)
+        try container.encode(description, forKey: .description)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(processedAt, forKey: .processedAt)
+    }
 }
 
 // MARK: - Payment Type Enum
@@ -225,6 +353,33 @@ struct PhotoVerification: Codable, Identifiable {
         self.submittedAt = submittedAt
         self.verifiedAt = verifiedAt
         self.status = status
+    }
+    
+    // Custom Codable implementation to handle Date encoding/decoding
+    enum CodingKeys: String, CodingKey {
+        case id, driverId, campaignId, photoUrl, submittedAt, verifiedAt, status
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        driverId = try container.decode(String.self, forKey: .driverId)
+        campaignId = try container.decode(String.self, forKey: .campaignId)
+        photoUrl = try container.decode(String.self, forKey: .photoUrl)
+        submittedAt = try container.decode(Date.self, forKey: .submittedAt)
+        verifiedAt = try container.decodeIfPresent(Date.self, forKey: .verifiedAt)
+        status = try container.decode(VerificationStatus.self, forKey: .status)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(driverId, forKey: .driverId)
+        try container.encode(campaignId, forKey: .campaignId)
+        try container.encode(photoUrl, forKey: .photoUrl)
+        try container.encode(submittedAt, forKey: .submittedAt)
+        try container.encodeIfPresent(verifiedAt, forKey: .verifiedAt)
+        try container.encode(status, forKey: .status)
     }
 }
 
